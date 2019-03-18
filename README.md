@@ -1,29 +1,17 @@
-# datame
+# Data Me Frontend
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Requirements
+ - Node v 10.15.3
+ - Node Package Manager (npm) v5.0.0
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Installation
+This process is not different from a regular Vue.js project installation. We run the following commands.
 
-### Run your tests
-```
-npm run test
-```
+`npm install`
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Running the server
+To run this project just run this command where the project is installed.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+`npm run serve`
+And magic happens...
