@@ -1,6 +1,6 @@
 <template>
-    <div>
-    <b-navbar type="dark" variant="dark" fixed="bottom" >
+    <div id="footer">
+    <b-navbar type="dark" variant="dark" fixed="bottom">
         <b-nav-text>© Copyright 2019 | Made with ❤️ in Sevilla</b-nav-text>
          <b-navbar-nav class="ml-auto">
             <b-nav-item href="#">About us</b-nav-item>

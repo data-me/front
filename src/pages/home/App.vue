@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Navbar />
+
     <Footer />
   </div>
 </template>
@@ -29,7 +30,10 @@ export default {
 }
 
 html {
-  background-color: #E8EDF0;
+  background-color: #ffffff;
 }
+
+
+
 
 </style>
