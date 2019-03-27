@@ -70,7 +70,8 @@ export default {
         currencys: [{ text: 'Select One', value: null }, 'Euros', 'Dollars', 'Pounds']
     }
   }, mounted: function () {
-    this.$http.get('http://localhost:8000/api/v1/offer/').then((result) => {
+    var token = 'JWT ' + this.$cookies.get('token')
+    this.$http.get('http://localhost:8000/api/v1/offer',{ Authorization: token}).then((result) => {
         this.items = result.data
       })
   }, methods: {
@@ -78,14 +79,14 @@ export default {
       
     },
      toggleModal() {
-
-       this.$http.post('http://localhost:8000/api/v1/offer/', {
+       var token = 'JWT ' + this.$cookies.get('token')
+       this.$http.post('http://localhost:8000/api/v1/offer', {
           'title': this.form.title,
           'description': this.form.description,
           'price_offered': this.form.price_offered,
           'currency': this.form.currency,
           'limit_time': (2019,12,12,10,40,0,0)
-      }).then((result) => {
+      },{ Authorization: token}).then((result) => {
           alert(result)
       })
 
