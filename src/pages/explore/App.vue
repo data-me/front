@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <Navbar/>
-        <br/>
+        <div class="create-offer">
+          <b-button id="create-offer" v-b-modal.modalxl variant="outline-primary" >Create new offer</b-button>
+        </div>
+
           <div id="offers" v-for="item in items">
           <b-card :title="item.title" :sub-title="item.price_offered + '€' ">
             <b-card-text>
@@ -11,6 +14,38 @@
             <b-link href="#" class="card-link">List of applicants</b-link>
           </b-card>
         </div>
+
+      <!-- Modal Pop up -->
+      <div>
+        <b-modal id="modalxl" hide-footer ref="newOffer" size="xl" title="Create an offer">
+          <b-form  @submit.prevent>
+            <label for="title">Title</label>
+            <b-input type="text" v-model="form.title" id="title" aria-describedby="titleHelpBlock" />
+            <b-form-text id="titleHelpBlock">
+              The main title for your offer, please keep it short.
+            </b-form-text>
+            <br/>
+            <label for="description">Description</label>
+            <b-input type="text" id="description" v-model="form.description" aria-describedby="descriptionHelpBlock" />
+            <b-form-text id="descriptionHelpBlock">
+              The description for your offer, here you can explain everything.
+            </b-form-text>
+            <br/>
+            <label for="price">Price offered</label>
+            <b-input type="number" id="price" v-model="form.price_offered" aria-describedby="priceHelpBlock" />
+            <b-form-text id="priceHelpBlock">
+              Give your offer a price.
+            </b-form-text>
+            <br/>
+            <label for="currency">Currency</label>
+             <b-form-select id="currency" :options="currencys" required v-model="form.currency" />
+             <br/>
+             <br/>
+             <b-button class="mt-2" variant="success" block @click="toggleModal">Create offer</b-button>
+          </b-form>
+        </b-modal>
+      </div>
+
   </div>
 </template>
 
@@ -21,19 +56,53 @@ import Footer from '../../components/Footer.vue'
 export default {
   name: 'app',
   components: {
-    Navbar,
-    Footer
+    Navbar
   },
   data () {
     return {
       items: [],
+      form: {
+          title: '',
+          description: '',
+          price_offered: null,
+          currency: null
+        },
+        currencys: [{ text: 'Select One', value: null }, 'Euros', 'Dollars', 'Pounds']
     }
   }, mounted: function () {
     this.$http.get('http://localhost:8000/api/v1/offer/').then((result) => {
         this.items = result.data
       })
+  }, methods: {
+    createOffer: function () {
+      
+    },
+     toggleModal() {
+       const formData = new FormData();
+       formData.append("title", this.form.title);
+       formData.append("description", this.form.description);
+       formData.append("price_offered", this.form.price_offered);
+       formData.append("currency", "0");
+       formData.append("limit_time", "2019,12,12,10,40,0,0");
+       
+       this.$http.post('http://localhost:8000/api/v1/offer/', formData ).then((result) => {
+          alert("Offer created successfully!")
+          location.reload()
+      })
+
+     }
   }
 }
+
+/*{
+          'title': this.form.title,
+          'description': this.form.description,
+          'price_offered': this.form.price_offered,
+          'currency': '0',
+          'limit_time': '2019,12,12,10,40,0,0'
+      },{ headers: {
+       'Content-Type': 'multipart/form-data'
+      }*/
 </script>
 
 <style>
@@ -47,6 +116,15 @@ export default {
 
 #offers {
   margin: 2em;
+}
+
+.create-offer {
+  text-align: right;
+}
+
+#create-offer {
+  margin-top: 2em;
+  margin-right: 2em;
 }
 
 html {
