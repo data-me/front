@@ -70,7 +70,10 @@ export default {
         currencys: [{ text: 'Select One', value: null }, 'Euros', 'Dollars', 'Pounds']
     }
   }, mounted: function () {
-    this.$http.get('http://localhost:8000/api/v1/offer/').then((result) => {
+    var token = 'JWT ' + this.$cookies.get('token')
+    this.$http.get('http://localhost:8000/api/v1/offer',{ headers: 
+      { Authorization: token }
+      }).then((result) => {
         this.items = result.data
       })
   }, methods: {
@@ -78,6 +81,7 @@ export default {
       
     },
      toggleModal() {
+       var token = 'JWT ' + this.$cookies.get('token')
        const formData = new FormData();
        formData.append("title", this.form.title);
        formData.append("description", this.form.description);
@@ -85,7 +89,9 @@ export default {
        formData.append("currency", "0");
        formData.append("limit_time", "2019,12,12,10,40,0,0");
        
-       this.$http.post('http://localhost:8000/api/v1/offer/', formData ).then((result) => {
+       this.$http.post('http://localhost:8000/api/v1/offer/', formData,{ headers: 
+      { Authorization: token }
+      }).then((result) => {
           alert("Offer created successfully!")
           location.reload()
       })
