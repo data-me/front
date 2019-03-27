@@ -32,7 +32,7 @@
             </b-form-text>
             <br/>
             <label for="price">Price offered</label>
-            <b-input type="number" id="price" v-model="form.price" aria-describedby="priceHelpBlock" />
+            <b-input type="number" id="price" v-model="form.price_offered" aria-describedby="priceHelpBlock" />
             <b-form-text id="priceHelpBlock">
               Give your offer a price.
             </b-form-text>
@@ -78,20 +78,31 @@ export default {
       
     },
      toggleModal() {
-
-       this.$http.post('http://localhost:8000/api/v1/offer/', {
-          'title': this.form.title,
-          'description': this.form.description,
-          'price_offered': this.form.price_offered,
-          'currency': this.form.currency,
-          'limit_time': (2019,12,12,10,40,0,0)
-      }).then((result) => {
-          alert(result)
+       const formData = new FormData();
+       formData.append("title", this.form.title);
+       formData.append("description", this.form.description);
+       formData.append("price_offered", this.form.price_offered);
+       formData.append("currency", "0");
+       formData.append("limit_time", "2019,12,12,10,40,0,0");
+       
+       this.$http.post('http://localhost:8000/api/v1/offer/', formData ).then((result) => {
+          alert("Offer created successfully!")
+          location.reload()
       })
 
      }
   }
 }
+
+/*{
+          'title': this.form.title,
+          'description': this.form.description,
+          'price_offered': this.form.price_offered,
+          'currency': '0',
+          'limit_time': '2019,12,12,10,40,0,0'
+      },{ headers: {
+       'Content-Type': 'multipart/form-data'
+      }*/
 </script>
 
 <style>
