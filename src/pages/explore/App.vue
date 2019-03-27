@@ -86,7 +86,7 @@ export default {
        formData.append("currency", "0");
        formData.append("limit_time", "2019,12,12,10,40,0,0");
        
-       this.$http.post('http://localhost:8000/api/v1/offer/', formData ).then((result) => {
+       this.$http.post('http://localhost:8000/api/v1/offer', formData ).then((result) => {
           alert("Offer created successfully!")
           location.reload()
       })
