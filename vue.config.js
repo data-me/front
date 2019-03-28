@@ -24,6 +24,18 @@ module.exports = {
         // extracted common chunks and vendor chunks.
         chunks: ['chunk-vendors', 'chunk-common', 'about']
       },
+      'applications': {
+        // entry for the page
+        entry: 'src/pages/applications/main.js',
+        // the source template
+        template: 'public/index.html',
+        // when using title option,
+        // template title tag needs to be <title><%= htmlWebpackPlugin.options.title %></title>
+        title: 'Applications ',
+        // chunks to include on this page, by default includes
+        // extracted common chunks and vendor chunks.
+        chunks: ['chunk-vendors', 'chunk-common', 'applications']
+      },
       'explore': {
         // entry for the page
         entry: 'src/pages/explore/main.js',
@@ -70,6 +82,18 @@ module.exports = {
         // chunks to include on this page, by default includes
         // extracted common chunks and vendor chunks.
         chunks: ['chunk-vendors', 'chunk-common', 'login']
+      },
+      'companies': {
+        // entry for the page
+        entry: 'src/pages/companies/main.js',
+        // the source template
+        template: 'public/index.html',
+        // when using title option,
+        // template title tag needs to be <title><%= htmlWebpackPlugin.options.title %></title>
+        title: 'Companies',
+        // chunks to include on this page, by default includes
+        // extracted common chunks and vendor chunks.
+        chunks: ['chunk-vendors', 'chunk-common', 'companies']
       }
     }
   }

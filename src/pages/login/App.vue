@@ -53,6 +53,11 @@ export default {
         this.$cookies.set('token',result.data.token)
         this.$router.replace({path:'/helloworld'})
         this.show = false
+        let token = `JWT ${this.$cookies.get('token')}`
+        this.$http.get('http://localhost:8000/api/v1/whoami', { headers: { Authorization: token }
+        }).then((result) => {
+          this.$cookies.set('user_type', result.data.user_type)
+        })
       })
     }
   }
