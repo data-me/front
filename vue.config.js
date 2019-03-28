@@ -47,6 +47,17 @@ module.exports = {
         // chunks to include on this page, by default includes
         // extracted common chunks and vendor chunks.
         chunks: ['chunk-vendors', 'chunk-common', 'mail']
+      },'apply': {
+        // entry for the page
+        entry: 'src/pages/apply/main.js',
+        // the source template
+        template: 'public/index.html',
+        // when using title option,
+        // template title tag needs to be <title><%= htmlWebpackPlugin.options.title %></title>
+        title: 'Create an apply',
+        // chunks to include on this page, by default includes
+        // extracted common chunks and vendor chunks.
+        chunks: ['chunk-vendors', 'chunk-common', 'apply']
       },'my_cv': {
         // entry for the page
         entry: 'src/pages/cv/main.js',
