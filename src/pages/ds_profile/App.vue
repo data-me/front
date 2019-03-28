@@ -2,7 +2,7 @@
 
   <div id="app">
     <Navbar/>
-    <div id="cv_items" v-for="item in items">
+    <div id="cv_items_5" v-for="item in items">
       <p class="display-3">{{item.Section}}<p>
       <div id="cv_items_sub" v-for="item2 in item.Items">
         <b-card :title="item2.name" :sub-title="item2.description">
@@ -31,8 +31,11 @@ export default {
       items: [],
     }
   }, mounted: function () {
+
+    var id_ds = window.location.search.split("=")[1]
+
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get('http://localhost:8000/api/v1/cv',{ headers: 
+    this.$http.get(`http://localhost:8000/api/v1/cv?dataScientistId=${id_ds}`,{ headers: 
       { Authorization: token }
       }).then((result) => {
         this.items = result.data
