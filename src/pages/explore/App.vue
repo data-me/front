@@ -13,10 +13,7 @@
           <div id="search-group">
             <b-form @submit="onSubmit">
               <b-input-group prepend="Search" class="mt-3">
-              <b-form-input id="search" v-model="form.search" placeholder="title or description"></b-form-input>
-              <b-input-group-append>
-                <b-button type="submit" variant="outline-primary">Submit</b-button>
-              </b-input-group-append>
+              <b-form-input v-on:keyup="onSubmit" id="search" v-model="form.search" placeholder="title or description"></b-form-input>
               </b-input-group>
             </b-form>
           </div>
@@ -199,16 +196,15 @@ export default {
       })
 
      },
-      onSubmit(evt) {
-        evt.preventDefault()
-        var token = `JWT ${this.$cookies.get('token')}`
+      onSubmit() {
+        let token = `JWT ${this.$cookies.get('token')}`
         this.$http.get(`http://127.0.0.1:8000/api/v1/offer?search=${this.form.search}`,{ headers:
           { Authorization: token }}).then((result) => {
             this.items = result.data
           })
       }
   }
-  }
+}
 
 
 
