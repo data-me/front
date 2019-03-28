@@ -7,7 +7,7 @@
             <b-card-text>
               {{item.description}}
             </b-card-text>
-            <b-link href="#" @click="senderId(item.DS_User_id)" class="card-link">DS</b-link>
+            <b-link href="#" @click="senderId(item.DS_User_id)" class="card-link">Data Scientist</b-link>
 
           </b-card>
         </div>
