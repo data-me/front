@@ -2,40 +2,32 @@
 
   <div id="app">
     <Navbar/>
+
+    <div id="cv_items" v-for="item in items">
+      <p class="display-3">{{item.Section}}<p>
+
+      <div id="cv_items_sub" v-for="item2 in item.Items">
         
-  <h1><span></span>My Curriculum</h1>
-          <div id="cv" v-for="item in items">
-          <b-card :title="item.name" :sub-title="item.entity  ">
-            <b-card-text>{{item.description}}</b-card-text>
-            <b-card-text>{{item.date_start | formatDate}} - {{item.date_finish}}</b-card-text>
-          </b-card>
-        </div>
 
-      <!--   <div>
-          <b-card-group deck>
-            <b-card
-              header="featured"
-              header-tag="header"
-              footer="Card Footer"
-              footer-tag="footer"
-              title="Title"
-            >
-              <b-card-text>Header and footers using props.</b-card-text>
-              <b-button href="#" variant="primary">Go somewhere</b-button>
-            </b-card>
+        <b-card :title="item2.name" :sub-title="item2.description">
+          <b-card-text>
+            {{item2.date_start}} - {{item2.date_finish}}
+          </b-card-text>
+       
+        </b-card>
 
-            <b-card title="Title" header-tag="header" footer-tag="footer">
-              <h6 slot="header" class="mb-0">Header Slot</h6>
-              <b-card-text>Header and footers using slots.</b-card-text>
-              <b-button href="#" variant="primary">Go somewhere</b-button>
-              <em slot="footer">Footer Slot</em>
-            </b-card>
-          </b-card-group>
-        </div> -->
+
+
+      </div>
 
       
+    </div>
+
+
 
   </div>
+
+
 </template>
 
 <script>
