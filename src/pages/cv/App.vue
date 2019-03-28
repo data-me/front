@@ -2,29 +2,16 @@
 
   <div id="app">
     <Navbar/>
-
     <div id="cv_items" v-for="item in items">
       <p class="display-3">{{item.Section}}<p>
-
       <div id="cv_items_sub" v-for="item2 in item.Items">
-        
-
         <b-card :title="item2.name" :sub-title="item2.description">
           <b-card-text>
             {{item2.date_start}} - {{item2.date_finish}}
           </b-card-text>
-       
         </b-card>
-
-
-
       </div>
-
-      
     </div>
-
-
-
   </div>
 
 
