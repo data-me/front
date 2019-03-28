@@ -1,28 +1,51 @@
 <template>
   <div id="app">
     <Navbar/>
-        <!-- Search bar -->
-        <div>
-          <b-form @submit="onSubmit">
-            <input v-model="form.search" placeholder="Look offer by title or description">
-            <b-button type="submit" variant="primary">Submit</b-button>
-          </b-form>
-        </div>
         <!-- ////// -->
         <!-- Create an offer -->
-        <div class="create-offer">
-          <b-button id="create-offer" v-b-modal.modalxl variant="outline-primary"  >Create new offer</b-button>
+        <div v-if="user_type === 'com'">
+          <div class="create-offer">
+            <b-button id="create-offer" v-b-modal.modalxl variant="outline-primary"  >Create new offer</b-button>
+          </div>
         </div>
-
-          <div id="offers" v-for="item in items">
-          <b-card :title="item.title" :sub-title="item.price_offered + '€' ">
-            <b-card-text>
-              {{item.description}}
-            </b-card-text>
-            <b-link href="#" v-if= "item.finished == false" class="card-link" v-b-modal.createApply variant="outline-primary" @click="saveId(item.id)">Apply</b-link>
-            <b-link href="#" class="card-link">List of applicants</b-link>
+        <div v-else-if="user_type === 'ds'">
+        <!-- Search bar -->
+          <div id="search-group">
+            <b-form @submit="onSubmit">
+              <b-input-group prepend="Search" class="mt-3">
+              <b-form-input id="search" v-model="form.search" placeholder="title or description"></b-form-input>
+              <b-input-group-append>
+                <b-button type="submit" variant="outline-primary">Submit</b-button>
+              </b-input-group-append>
+              </b-input-group>
+            </b-form>
+          </div>
+        </div>
+        <!-- ////// -->
+        
+        <!-- Show offers -->
+        <div id="offers" v-for="(item, index) in items">
+          <b-card no-body>
+            <b-card-header header-tag="header" class="p-3" role="tab">
+              <b-button block v-b-toggle="'accordion-' + index" variant="outline-primary">
+                {{item.title}}
+              </b-button>
+            </b-card-header>
+            <b-collapse :id="'accordion-'+index" accordion="my-accordion" role="tabpanel">
+              <b-card-body>
+                <b-card-text><span class="font-weight-bold">Description: </span> {{item.description}}</b-card-text>
+                <b-card-text><span class="font-weight-bold">Price offered: </span>{{item.price_offered + '€'}}</b-card-text>
+                <b-card-text><span class="font-weight-bold">Creation date: </span>{{item.creation_date.slice(0,10)}}</b-card-text>
+                <b-card-text><span class="font-weight-bold">Limit date: </span>{{item.limit_time.slice(0,10)}}</b-card-text>
+                <b-card-text><span class="font-weight-bold">State: </span>{{ item.finished ? 'Finished' : 'Not finished' }}</b-card-text>
+                <b-card-text></b-card-text>
+                <div v-if="user_type === 'ds'">
+                  <b-link href="#" v-if= "item.finished == false" class="card-link" v-b-modal.createApply variant="outline-primary" @click="saveId(item.id)">Apply</b-link>
+                </div>
+              </b-card-body>
+            </b-collapse>
           </b-card>
-        </div>
+      </div>
       <!-- ////// -->
       <!-- Modal Pop up -->
       <div>
@@ -69,7 +92,7 @@
       </div>
 
 
-            <!-- Modal Pop up CreateApply -->
+      <!-- Modal Pop up CreateApply -->
       <div>
         <b-modal id="createApply" hide-footer ref="newApply" size="xl" title="Create an apply">
           <b-form  @submit.prevent>
@@ -121,6 +144,7 @@ export default {
             offerId: null,
         },
         offerId: '',
+        user_type: this.$cookies.get('user_type')
         
     }
     
@@ -226,6 +250,11 @@ export default {
 
 html {
   background-color: #ffffff;
+}
+
+#search-group{
+  margin-left: 15%;
+  margin-right: 15%;
 }
 
 </style>
