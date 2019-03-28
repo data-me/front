@@ -87,7 +87,7 @@ export default {
       })
   }, methods: {
     createOffer: function () {
-      
+
     },
      toggleModal() {
        var token = 'JWT ' + this.$cookies.get('token')
@@ -97,8 +97,8 @@ export default {
        formData.append("price_offered", this.form.price_offered);
        formData.append("currency", "0");
        formData.append("limit_time", "2019,12,12,10,40,0,0");
-       
-       this.$http.post('http://localhost:8000/api/v1/offer', formData,{ headers: 
+
+       this.$http.post('http://localhost:8000/api/v1/offer', formData,{ headers:
       { Authorization: token }
       }).then((result) => {
           alert("Offer created successfully!")
@@ -109,7 +109,7 @@ export default {
       onSubmit(evt) {
         evt.preventDefault()
         var token = `JWT ${this.$cookies.get('token')}`
-        this.$http.get(`http://127.0.0.1:8000/api/v1/offer?search=${this.form.search}`,{ headers: 
+        this.$http.get(`http://127.0.0.1:8000/api/v1/offer?search=${this.form.search}`,{ headers:
           { Authorization: token }}).then((result) => {
             this.items = result.data
           })
@@ -134,7 +134,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  
+
 }
 
 #offers {
