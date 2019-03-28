@@ -36,7 +36,18 @@ module.exports = {
         // extracted common chunks and vendor chunks.
         chunks: ['chunk-vendors', 'chunk-common', 'explore']
       },
-      'my_cv': {
+      'mail': {
+        // entry for the page
+        entry: 'src/pages/mail/main.js',
+        // the source template
+        template: 'public/index.html',
+        // when using title option,
+        // template title tag needs to be <title><%= htmlWebpackPlugin.options.title %></title>
+        title: 'Received Messages',
+        // chunks to include on this page, by default includes
+        // extracted common chunks and vendor chunks.
+        chunks: ['chunk-vendors', 'chunk-common', 'mail']
+      },'my_cv': {
         // entry for the page
         entry: 'src/pages/cv/main.js',
         // the source template
