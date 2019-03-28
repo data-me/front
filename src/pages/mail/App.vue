@@ -16,24 +16,19 @@
         <b-modal id="modalxl" hide-footer ref="newMessage" size="xl" title="Create a message">
           <b-form  @submit.prevent>
             <label for="title">Title</label>
-            <b-input type="text" v-model="form.title" id="title" aria-describedby="titleHelpBlock" />
+            <b-input type="text" v-model="form.title" id="title" :state="form.title.length > 0"  :maxlength="100" aria-describedby="titleHelpBlock" />
             <b-form-text id="titleHelpBlock">
-              The main subject of your message, please keep it short.
+              The main subject of your message, max 100 characters.
             </b-form-text>
             <br/>
             <label for="body">Body</label>
-            <b-input type="text" id="body" v-model="form.body" aria-describedby="bodyHelpBlock" />
+            <b-form-textarea type="text" id="body" v-model="form.body" :state="form.body.length > 0" :maxlength="250" aria-describedby="bodyHelpBlock" />
             <b-form-text id="bodyHelpBlock">
-              The body of your message.
+              The body of your message, max 250 characters.
             </b-form-text>
             <br/>
-            <label for="receiverId">Receiver</label>
-            <select v-model="selected">
-                <option v-for="opt in options">
-                {{ opt.name }}
-                </option>
-            </select>
-            <!--<b-input type="text" id="receiverId" v-model="form.receiver" aria-describedby="receiverHelpBlock" />-->
+            <label for="receiver">Receiver</label>
+            <b-input type="text" id="receiver" v-model="form.receiver" :state="form.body.length > 0" :minlength="100" aria-describedby="receiverHelpBlock" />
             <b-form-text id="receiverHelpBlock">
               The receiver of your message.
             </b-form-text>
@@ -58,8 +53,6 @@ export default {
   data () {
     return {
       items: [],
-      selected: '', //usuario seleccionado
-      options:'', //lista de usuarios
       form: {
           title: '',
           body: '',
@@ -79,7 +72,7 @@ export default {
       }).then((result) => {
         this.options = result.data
       })
-      
+
   }, methods: {
     createMessage: function () {
       
@@ -89,12 +82,12 @@ export default {
        const formData = new FormData();
        formData.append("title", this.form.title);
        formData.append("body", this.form.body);
-       formData.append("receiverId", this.form.receiver);
+       formData.append("username", this.form.receiver);
       
        this.$http.post('http://localhost:8000/api/v1/message', formData,{ headers: 
       { Authorization: token }
       }).then((result) => {
-          alert("Message created successfully!")
+          alert(result.data.message)
           location.reload()
       })
     }
