@@ -1,6 +1,15 @@
 <template>
   <div id="app">
     <Navbar/>
+        <!-- Search bar -->
+        <div>
+          <b-form @submit="onSubmit">
+            <input v-model="form.search" placeholder="Look offer by title or description">
+            <b-button type="submit" variant="primary">Submit</b-button>
+          </b-form>
+        </div>
+        <!-- ////// -->
+        <!-- Create an offer -->
         <div class="create-offer">
           <b-button id="create-offer" v-b-modal.modalxl variant="outline-primary" >Create new offer</b-button>
         </div>
@@ -14,7 +23,7 @@
             <b-link href="#" class="card-link">List of applicants</b-link>
           </b-card>
         </div>
-
+      <!-- ////// -->
       <!-- Modal Pop up -->
       <div>
         <b-modal id="modalxl" hide-footer ref="newOffer" size="xl" title="Create an offer">
@@ -89,14 +98,22 @@ export default {
        formData.append("currency", "0");
        formData.append("limit_time", "2019,12,12,10,40,0,0");
        
-       this.$http.post('http://localhost:8000/api/v1/offer/', formData,{ headers: 
+       this.$http.post('http://localhost:8000/api/v1/offer', formData,{ headers: 
       { Authorization: token }
       }).then((result) => {
           alert("Offer created successfully!")
           location.reload()
       })
 
-     }
+     },
+      onSubmit(evt) {
+        evt.preventDefault()
+        var token = `JWT ${this.$cookies.get('token')}`
+        this.$http.get(`http://127.0.0.1:8000/api/v1/offer?search=${this.form.search}`,{ headers: 
+          { Authorization: token }}).then((result) => {
+            this.items = result.data
+          })
+      }
   }
 }
 
