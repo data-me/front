@@ -1,6 +1,15 @@
 <template>
   <div id="app">
     <Navbar/>
+        <!-- Search bar -->
+        <div>
+          <b-form @submit="onSubmit">
+            <input v-model="form.search" placeholder="Look offer by title or description">
+            <b-button type="submit" variant="primary">Submit</b-button>
+          </b-form>
+        </div>
+        <!-- ////// -->
+        <!-- Create an offer -->
         <div class="create-offer">
           <b-button id="create-offer" v-b-modal.modalxl variant="outline-primary"  >Create new offer</b-button>
         </div>
@@ -14,7 +23,7 @@
             <b-link href="#" class="card-link">List of applicants</b-link>
           </b-card>
         </div>
-
+      <!-- ////// -->
       <!-- Modal Pop up -->
       <div>
         <b-modal id="modalxl" hide-footer ref="newOffer" size="xl" title="Create an offer">
@@ -165,7 +174,15 @@ export default {
           location.reload()
       })
 
-     }
+     },
+      onSubmit(evt) {
+        evt.preventDefault()
+        var token = `JWT ${this.$cookies.get('token')}`
+        this.$http.get(`http://127.0.0.1:8000/api/v1/offer?search=${this.form.search}`,{ headers: 
+          { Authorization: token }}).then((result) => {
+            this.items = result.data
+          })
+      }
   }
   }
 
