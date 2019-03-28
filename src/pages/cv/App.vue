@@ -10,8 +10,11 @@
             {{item2.date_start}} - {{item2.date_finish}}
           </b-card-text>
         </b-card>
+        
       </div>
+      <CreateItemSection :secid="item.Section"></CreateItemSection>
     </div>
+    <componentTest></componentTest>
   </div>
 
 
@@ -20,11 +23,13 @@
 <script>
 import Navbar from '../../components/Navbar.vue'
 import Footer from '../../components/Footer.vue'
+import CreateItemSection from '../../components/Curriculum/CreateItemSection.vue'
 
 export default {
   name: 'app',
   components: {
-    Navbar
+    Navbar,
+    CreateItemSection,
   },
   data () {
     return {
