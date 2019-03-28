@@ -11,6 +11,7 @@
         <b-navbar-nav class="ml-auto">
             <b-nav-item href="/explore">Explore</b-nav-item>
             <b-nav-item href="#">Pricing</b-nav-item>
+            <b-nav-item href="/mail">Mail</b-nav-item>
             <b-nav-item href="/my_cv">My Curriculum</b-nav-item>
             <b-nav-item href="/login">Log In</b-nav-item>
             <b-nav-item-dropdown text="Lang" right>
