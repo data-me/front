@@ -49,7 +49,9 @@ export default {
           'password':password
       })
       .then((result) => {
-          alert("Wrong username or password, please try again")
+          if(resut.status == 400){
+              throw next(alert("Wrong username or password, please try again"))
+          }
           //alert(JSON.stringify(result.data))
           this.$cookies.set('token',result.data.token)
           this.$router.replace({path:'/helloworld'})
