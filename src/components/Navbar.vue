@@ -2,7 +2,7 @@
     <div id="nav">
     <b-navbar toggleable="lg" type="dark" variant="dark">
         <b-navbar-brand href="/">
-            <img id="DataMe-brand" src="..\assets\DataMe-brand.png">
+            <img id="DataMe-brand" src="https://data-me.github.io/img/branding/DataMe-brand.png">
             </b-navbar-brand>
 
 
