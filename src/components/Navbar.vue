@@ -22,7 +22,6 @@
             <b-dropdown-item href="#">EN</b-dropdown-item>
             <b-dropdown-item href="#">ES</b-dropdown-item>
             </b-nav-item-dropdown>
-            -->
         </b-navbar-nav>
         </b-collapse>
     </b-navbar>
@@ -54,25 +53,18 @@ export default {
     } else {
       this.isDataScientist = true
     }
-<<<<<<< HEAD
 
     this.$http.get('http://localhost:8000/api/v1/apply',{ headers:
       { Authorization: token }
       }).then((result) => {
         this.items = result.data
       })
-  }
-  }
-
-=======
-  },
-    created:function(){
+  }, created:function(){
       Auth.logout();
       console.log(Auth.getLogin());
       this.$router.go('/login');
     }
 }
->>>>>>> d6a7904aae3182e15d960ed3e349b17a9e7207c1
 </script>
 <style>
 
