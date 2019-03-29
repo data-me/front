@@ -88,7 +88,7 @@
             </b-form-text>
              <br/>
 
-             <b-button class="mt-2" variant="success" block @click="toggleModal">Create offer</b-button>
+             <b-button class="mt-2" variant="success" block @click="createOffer">Create offer</b-button>
           </b-form>
         </b-modal>
       </div>
@@ -194,15 +194,10 @@ export default {
       }
 
      },
-
-
-    createOffer: function () {
-
-    },
     saveId: function(idOffer){
     this.offerId = idOffer
     },
-     toggleModal() {
+     createOffer() {
        var token = 'JWT ' + this.$cookies.get('token')
        const formData = new FormData();
        formData.append("title", this.form.title);
@@ -214,7 +209,7 @@ export default {
        formData.append("contract", this.form.contract);
 
 
-       this.$http.post('https://api-datame.herokuapp.com/api/v1/offer', formData,{ headers:
+      this.$http.post('https://api-datame.herokuapp.com/api/v1/offer', formData,{ headers:
       { Authorization: token }
       }).then((result) => {
           alert(result.data.message)
