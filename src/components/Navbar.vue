@@ -58,11 +58,10 @@ export default {
     } else {
       this.isDataScientist = true
     }
-
-    if (this.getCookie('token')) {
-      this.isLoggedIn = true
-    } else {
-      this.isLoggedIn = false
+  }, created:function(){
+      Auth.logout();
+      console.log(Auth.getLogin());
+      this.$router.go('/login');
     }
 
   }, created:function(){
@@ -71,7 +70,7 @@ export default {
       } else {
         this.isLoggedIn = false
       }
-    }, methods: {	
+    }, methods: {
         getCookie: function(name) {
           var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
           return v ? v[2] : null;
