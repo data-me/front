@@ -6,6 +6,7 @@
         <div class="intro-text">
           <div class="intro-lead-in">A new way of conceiving Big Data</div>
             <div class="intro-heading text-uppercase">We match data scientists and projects</div>
+            <div class="intro-lead-in">DataMe - Version 1.0 (Sprint 1)</div>
           </div>
         </div>
   </header>
