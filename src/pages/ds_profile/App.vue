@@ -2,7 +2,7 @@
 
   <div id="app">
     <Navbar/>
-    <div id="cv_items" v-for="item in items">
+    <div id="cv_items_5" v-for="item in items">
       <p class="display-3">{{item.Section}}<p>
       <div id="cv_items_sub" v-for="item2 in item.Items">
         <b-card :title="item2.name" :sub-title="item2.description">
@@ -10,16 +10,8 @@
             {{item2.date_start}} - {{item2.date_finish}}
           </b-card-text>
         </b-card>
-
-      </div>
-      <div id="create_item_section">
-      <CreateItemSection :secid="item.Section_Id"></CreateItemSection>
       </div>
     </div>
-    <div id="create_section">
-    <create-section></create-section>
-    </div>
-
   </div>
 
 
@@ -28,23 +20,22 @@
 <script>
 import Navbar from '../../components/Navbar.vue'
 import Footer from '../../components/Footer.vue'
-import CreateItemSection from '../../components/Curriculum/CreateItemSection.vue'
-import CreateSection from '../../components/Curriculum/CreateSection.vue'
 
 export default {
   name: 'app',
   components: {
-    Navbar,
-    CreateItemSection,
-    CreateSection,
+    Navbar
   },
   data () {
     return {
       items: [],
     }
   }, mounted: function () {
+
+    var id_ds = window.location.search.split("=")[1]
+
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get('https://api-datame.herokuapp.com/api/v1/cv',{ headers:
+    this.$http.get(`https://api-datame.herokuapp.com/api/v1/cv?dataScientistId=${id_ds}`,{ headers:
       { Authorization: token }
       }).then((result) => {
         this.items = result.data
@@ -76,19 +67,11 @@ export default {
 
 }
 
-#cv_items {
+#cv_items_5 {
   margin: 2em;
 }
 
 #cv_items_sub {
-  margin: 2em;
-}
-
-#create_item_section {
-  margin: 2em;
-}
-
-#create_section {
   margin: 2em;
 }
 

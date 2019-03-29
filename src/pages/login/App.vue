@@ -43,22 +43,24 @@ export default {
       var username = this.form.username
       var password = this.form.password
 
-      const baseURI = 'http://localhost:8000/api/v1/login'
+      const baseURI = 'https://api-datame.herokuapp.com/api/v1/login'
       this.$http.post(baseURI, {
           'username':username,
           'password':password
       })
       .then((result) => {
-        //alert(JSON.stringify(result.data))
-        this.$cookies.set('token',result.data.token)
-        this.$router.replace({path:'/helloworld'})
-        this.show = false
-        let token = `JWT ${this.$cookies.get('token')}`
-        this.$http.get('http://localhost:8000/api/v1/whoami', { headers: { Authorization: token }
+          //alert(JSON.stringify(result.data))
+          this.$cookies.set('token',result.data.token)
+          this.$router.replace({path:'/helloworld'})
+          this.show = false
+          let token = `JWT ${this.$cookies.get('token')}`
+          this.$http.get('https://api-datame.herokuapp.com/api/v1/whoami', { headers: { Authorization: token }
         }).then((result) => {
           this.$cookies.set('user_type', result.data.user_type)
         })
-      })
+      }).catch(()=>{
+          alert("Unable to log in with provided credentials, please try again.")
+        })
     }
   }
 }
