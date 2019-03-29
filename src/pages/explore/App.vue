@@ -35,6 +35,8 @@
                 <b-card-text><span class="font-weight-bold">Creation date: </span>{{item.creation_date.slice(0,10)}}</b-card-text>
                 <b-card-text><span class="font-weight-bold">Limit date: </span>{{item.limit_time.slice(0,10)}}</b-card-text>
                 <b-card-text><span class="font-weight-bold">State: </span>{{ item.finished ? 'Finished' : 'Not finished' }}</b-card-text>
+                <b-card-text><span class="font-weight-bold">Contract: {{item.contract}}</b-card-text>
+                <b-card-text><span class="font-weight-bold">File: {{item.files}}</b-card-text>
                 <b-card-text></b-card-text>
                 <div v-if="user_type === 'ds'">
                   <b-link href="#" v-if= "item.finished == false" class="card-link" v-b-modal.createApply variant="outline-primary" @click="saveId(item.id)">Apply</b-link>
