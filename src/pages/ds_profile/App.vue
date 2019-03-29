@@ -35,7 +35,7 @@ export default {
     var id_ds = window.location.search.split("=")[1]
 
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get(`http://localhost:8000/api/v1/cv?dataScientistId=${id_ds}`,{ headers: 
+    this.$http.get(`https://api-datame.herokuapp.com/api/v1/cv?dataScientistId=${id_ds}`,{ headers:
       { Authorization: token }
       }).then((result) => {
         this.items = result.data
@@ -64,10 +64,14 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  
+
 }
 
-#offers {
+#cv_items_5 {
+  margin: 2em;
+}
+
+#cv_items_sub {
   margin: 2em;
 }
 

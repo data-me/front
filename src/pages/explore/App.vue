@@ -19,7 +19,7 @@
           </div>
         </div>
         <!-- ////// -->
-        
+
         <!-- Show offers -->
         <div id="offers" v-for="(item, index) in items">
           <b-card no-body>
@@ -49,13 +49,13 @@
         <b-modal id="modalxl" hide-footer ref="newOffer" size="xl" title="Create an offer">
           <b-form  @submit.prevent>
             <label for="title">Title</label>
-            <b-input type="text" v-model="form.title" id="title" aria-describedby="titleHelpBlock" />
+            <b-input type="text" v-model="form.title" id="title" :state="form.title.length > 0"  :maxlength="80" aria-describedby="titleHelpBlock" />
             <b-form-text id="titleHelpBlock">
-              The main title for your offer, please keep it short. 
+              The main title for your offer, max 80 characters.
             </b-form-text>
             <br/>
             <label for="description">Description</label>
-            <b-input type="text" id="description" v-model="form.description" aria-describedby="descriptionHelpBlock" />
+            <b-input type="text" id="description" v-model="form.description" :state="form.description.length > 0" aria-describedby="descriptionHelpBlock" />
             <b-form-text id="descriptionHelpBlock">
               The description for your offer, here you can explain everything.
             </b-form-text>
@@ -94,16 +94,23 @@
         <b-modal id="createApply" hide-footer ref="newApply" size="xl" title="Create an apply">
           <b-form  @submit.prevent>
             <label for="title">Title</label>
-            <b-input type="text" v-model="formApply.title" id="title" aria-describedby="titleHelpBlock" />
+
+            <b-input type="text" v-model="formApply.title" :state="tittleApply" id="title" aria-describedby="titleHelpBlock" />
             <b-form-text id="titleHelpBlock">
-              The main title for your appy, please keep it short.
+              The main title for your apply, please keep it short.
             </b-form-text>
+             <b-form-invalid-feedback id="apply-tittle-feedback">
+            Enter at least 5 letters
+            </b-form-invalid-feedback>
             <br/>
             <label for="description">Description</label>
-            <b-input type="text" id="description" v-model="formApply.description" aria-describedby="descriptionHelpBlock" />
+            <b-input type="text" id="description" v-model="formApply.description" :state="descriptionApply" aria-describedby="descriptionHelpBlock" />
             <b-form-text id="descriptionHelpBlock">
               The description for your apply, here you can explain everything.
             </b-form-text>
+            <b-form-invalid-feedback id="apply-description-feedback">
+            Enter at least 10 letters
+            </b-form-invalid-feedback>
             <br/>
              <b-button class="mt-2" variant="success" block @click="toggleCreateApply">Create apply</b-button>
           </b-form>
@@ -117,10 +124,19 @@
 import Navbar from '../../components/Navbar.vue'
 import Footer from '../../components/Footer.vue'
 
+
 export default {
   name: 'app',
   components: {
     Navbar
+  },
+  computed:{
+    tittleApply(){
+        return this.formApply.title.length > 5 ? true : false
+    },
+     descriptionApply(){
+        return this.formApply.description.length > 10 ? true : false
+    }
   },
   data () {
     return {
@@ -142,12 +158,12 @@ export default {
         },
         offerId: '',
         user_type: this.$cookies.get('user_type')
-        
+
     }
-    
+
   }, mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get('http://localhost:8000/api/v1/offer',{ headers: 
+    this.$http.get('https://api-datame.herokuapp.com/api/v1/offer',{ headers:
       { Authorization: token }
       }).then((result) => {
         this.items = result.data
@@ -157,15 +173,20 @@ export default {
       toggleCreateApply() {
        var token = 'JWT ' + this.$cookies.get('token')
        const formApply = new FormData();
+       if (this.formApply.title.length < 5 || this.formApply.description.length < 10){
+        alert("Please correct the errors")
+
+       } else{
        formApply.append("title", this.formApply.title);
        formApply.append("description", this.formApply.description);
        formApply.append("offerId", this.offerId);
-       this.$http.post('http://localhost:8000/api/v1/apply', formApply,{ headers: 
+       this.$http.post('https://api-datame.herokuapp.com/api/v1/apply', formApply,{ headers:
       { Authorization: token }
       }).then((result) => {
           alert(result.data.message)
           location.reload()
       })
+      }
 
      },
 
@@ -186,9 +207,9 @@ export default {
        formData.append("limit_time", "2019,12,12,10,40,0,0");
        formData.append("files", this.form.files);
        formData.append("contract", this.form.contract);
-       
-       
-       this.$http.post('http://localhost:8000/api/v1/offer', formData,{ headers: 
+
+
+       this.$http.post('https://api-datame.herokuapp.com/api/v1/offer', formData,{ headers:
       { Authorization: token }
       }).then((result) => {
           alert(result.data.message)
@@ -198,7 +219,7 @@ export default {
      },
       onSubmit() {
         let token = `JWT ${this.$cookies.get('token')}`
-        this.$http.get(`http://127.0.0.1:8000/api/v1/offer?search=${this.form.search}`,{ headers:
+        this.$http.get(`https://api-datame.herokuapp.com/api/v1/offer?search=${this.form.search}`,{ headers:
           { Authorization: token }}).then((result) => {
             this.items = result.data
           })

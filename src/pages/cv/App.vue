@@ -10,11 +10,15 @@
             {{item2.date_start}} - {{item2.date_finish}}
           </b-card-text>
         </b-card>
-        
+
       </div>
+      <div id="create_item_section">
       <CreateItemSection :secid="item.Section_Id"></CreateItemSection>
+      </div>
     </div>
+    <div id="create_section">
     <create-section></create-section>
+    </div>
 
   </div>
 
@@ -40,7 +44,7 @@ export default {
     }
   }, mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get('http://localhost:8000/api/v1/cv',{ headers: 
+    this.$http.get('https://api-datame.herokuapp.com/api/v1/cv',{ headers:
       { Authorization: token }
       }).then((result) => {
         this.items = result.data
@@ -69,10 +73,22 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  
+
 }
 
-#offers {
+#cv_items {
+  margin: 2em;
+}
+
+#cv_items_sub {
+  margin: 2em;
+}
+
+#create_item_section {
+  margin: 2em;
+}
+
+#create_section {
   margin: 2em;
 }
 
