@@ -30,7 +30,7 @@
             </b-form-text>
             <br/>
             <label for="receiver">Receiver</label>
-            <b-input type="text" id="receiver" v-model="form.receiver" :state="form.body.length > 0" :minlength="100" aria-describedby="receiverHelpBlock" />
+            <b-input type="text" id="receiver" v-model="form.receiver" aria-describedby="receiverHelpBlock" />
             <b-form-text id="receiverHelpBlock">
               The username of the receiver of your message.
             </b-form-text>

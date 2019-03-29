@@ -49,13 +49,13 @@
         <b-modal id="modalxl" hide-footer ref="newOffer" size="xl" title="Create an offer">
           <b-form  @submit.prevent>
             <label for="title">Title</label>
-            <b-input type="text" v-model="form.title" id="title" aria-describedby="titleHelpBlock" />
+            <b-input type="text" v-model="form.title" id="title" :state="form.title.length > 0"  :maxlength="80" aria-describedby="titleHelpBlock" />
             <b-form-text id="titleHelpBlock">
-              The main title for your offer, please keep it short.
+              The main title for your offer, max 80 characters.
             </b-form-text>
             <br/>
             <label for="description">Description</label>
-            <b-input type="text" id="description" v-model="form.description" aria-describedby="descriptionHelpBlock" />
+            <b-input type="text" id="description" v-model="form.description" :state="form.description.length > 0" aria-describedby="descriptionHelpBlock" />
             <b-form-text id="descriptionHelpBlock">
               The description for your offer, here you can explain everything.
             </b-form-text>
@@ -96,7 +96,7 @@
             <label for="title">Title</label>
             <b-input type="text" v-model="formApply.title" id="title" aria-describedby="titleHelpBlock" />
             <b-form-text id="titleHelpBlock">
-              The main title for your appy, please keep it short.
+              The main title for your apply, please keep it short.
             </b-form-text>
             <br/>
             <label for="description">Description</label>
