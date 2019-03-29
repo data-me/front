@@ -30,7 +30,7 @@ export default {
       }
     }, mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get('https://api-datame.herokuapp.com/api/v1/section_names',{ headers: 
+    this.$http.get('https://api-datame.herokuapp.com/api/v1/section_names',{ headers:
       { Authorization: token }
       }).then((result) => {
           for(var i = 0, size = result.data.length; i < size ; i++){

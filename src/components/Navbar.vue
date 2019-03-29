@@ -56,12 +56,6 @@ export default {
     } else {
       this.isDataScientist = true
     }
-
-    this.$http.get('http://localhost:8000/api/v1/apply',{ headers:
-      { Authorization: token }
-      }).then((result) => {
-        this.items = result.data
-      })
   }, created:function(){
       Auth.logout();
       console.log(Auth.getLogin());

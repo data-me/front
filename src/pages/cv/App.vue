@@ -7,7 +7,7 @@
       <div id="cv_items_sub" v-for="item2 in item.Items">
         <b-card :title="item2.name" :sub-title="item2.description">
           <b-card-text>
-            {{item2.date_start.slice(0,10)}} - {{item2.date_finish.slice(0,10)}}
+            {{item2.entity}}
           </b-card-text>
         </b-card>
 
