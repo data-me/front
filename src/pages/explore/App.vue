@@ -55,7 +55,7 @@
             </b-form-text>
             <br/>
             <label for="description">Description</label>
-            <b-input type="text" id="description" v-model="form.description" aria-describedby="descriptionHelpBlock" />
+            <b-input type="text" id="description"  v-model="form.description" aria-describedby="descriptionHelpBlock" />
             <b-form-text id="descriptionHelpBlock">
               The description for your offer, here you can explain everything.
             </b-form-text>
@@ -94,16 +94,23 @@
         <b-modal id="createApply" hide-footer ref="newApply" size="xl" title="Create an apply">
           <b-form  @submit.prevent>
             <label for="title">Title</label>
-            <b-input type="text" v-model="formApply.title" id="title" aria-describedby="titleHelpBlock" />
+
+            <b-input type="text" v-model="formApply.title" :state="tittleApply" id="title" aria-describedby="titleHelpBlock" />
             <b-form-text id="titleHelpBlock">
               The main title for your appy, please keep it short.
             </b-form-text>
+             <b-form-invalid-feedback id="apply-tittle-feedback">
+            Enter at least 5 letters
+            </b-form-invalid-feedback>
             <br/>
             <label for="description">Description</label>
-            <b-input type="text" id="description" v-model="formApply.description" aria-describedby="descriptionHelpBlock" />
+            <b-input type="text" id="description" v-model="formApply.description" :state="descriptionApply" aria-describedby="descriptionHelpBlock" />
             <b-form-text id="descriptionHelpBlock">
               The description for your apply, here you can explain everything.
             </b-form-text>
+            <b-form-invalid-feedback id="apply-description-feedback">
+            Enter at least 10 letters
+            </b-form-invalid-feedback>
             <br/>
              <b-button class="mt-2" variant="success" block @click="toggleCreateApply">Create apply</b-button>
           </b-form>
@@ -117,10 +124,19 @@
 import Navbar from '../../components/Navbar.vue'
 import Footer from '../../components/Footer.vue'
 
+
 export default {
   name: 'app',
   components: {
     Navbar
+  },
+  computed:{
+    tittleApply(){
+        return this.formApply.title.length > 5 ? true : false
+    },
+     descriptionApply(){
+        return this.formApply.description.length > 10 ? true : false
+    }
   },
   data () {
     return {
@@ -157,6 +173,10 @@ export default {
       toggleCreateApply() {
        var token = 'JWT ' + this.$cookies.get('token')
        const formApply = new FormData();
+       if (this.formApply.title.length < 5 || this.formApply.description.length < 10){
+        alert("Please correct the errors")
+
+       } else{
        formApply.append("title", this.formApply.title);
        formApply.append("description", this.formApply.description);
        formApply.append("offerId", this.offerId);
@@ -166,6 +186,7 @@ export default {
           alert(result.data.message)
           location.reload()
       })
+      }
 
      },
 
