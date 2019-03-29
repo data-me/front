@@ -70,6 +70,11 @@
              <b-form-select id="currency" :options="currencys" required v-model="form.currency" />
              <br/>
              <br/>
+             <label for="limit_date">Limit date:</label>
+            <b-input type="text" id="limit_date" v-model="form.limit_date" aria-describedby="descriptionHelpBlock" />
+            <b-form-text id="descriptionHelpBlock">
+              Limit date for being offered. (yyyy-MM-dd HH:mm)
+            </b-form-text>
              <label for="files">Files</label>
             <b-input type="text" id="files" v-model="form.files" aria-describedby="descriptionHelpBlock" />
             <b-form-text id="descriptionHelpBlock">
@@ -204,7 +209,7 @@ export default {
        formData.append("description", this.form.description);
        formData.append("price_offered", this.form.price_offered);
        formData.append("currency", "0");
-       formData.append("limit_time", "2019,12,12,10,40,0,0");
+       formData.append("limit_time", this.form.limit_time);
        formData.append("files", this.form.files);
        formData.append("contract", this.form.contract);
 
