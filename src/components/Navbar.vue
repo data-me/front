@@ -18,6 +18,7 @@
             <b-nav-item href="/my_cv">Curriculum</b-nav-item>
             </div>
             <b-nav-item href="/login">Log In</b-nav-item>
+
             <!--
             <b-nav-item-dropdown text="Lang" right>
             <b-dropdown-item href="#">EN</b-dropdown-item>
