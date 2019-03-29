@@ -1,9 +1,4 @@
 module.exports = {
-    configureWebpack: {
-      devServer: {
-        historyApiFallback: true
-      }
-    },
     pages: {
       index: {
         // entry for the page
