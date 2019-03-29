@@ -7,6 +7,8 @@
             <b-card-text>
               {{item.description}}
             </b-card-text>
+            <b-link href="#" @click="senderId(item.DS_User_id)" class="card-link">Data Scientist</b-link>
+            <b-link href="#" class="card-link" v-show="isCompany" @click="toggleAcceptApply(item.id)">Accept</b-link>
           </b-card>
         </div>
 
@@ -30,16 +32,45 @@ export default {
           description: '',
           status: '',
           date: null
-        }
+        },
+      isCompany: null
     }
   }, mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
+
+    if (this.$cookies.get('user_type') == 'com') {
+      this.isCompany = true
+    } else {
+      this.isCompany = false
+    }
+    
     this.$http.get('http://localhost:8000/api/v1/apply',{ headers:
       { Authorization: token }
       }).then((result) => {
         this.items = result.data
       })
   }, methods: {
+
+    senderId: function(id){
+      var x = `ds_profile?ds_id=${id}`
+
+      window.location.href = x
+
+  
+    },
+
+      toggleAcceptApply(id) {
+       var token = 'JWT ' + this.$cookies.get('token')
+       var formAccept = new FormData()
+       formAccept.append('idApply', id)
+       this.$http.post('http://localhost:8000/api/v1/accept', formAccept, { headers: 
+      { Authorization: token }
+      }).then((result) => {
+          alert(result.data.message)
+          location.reload()
+      })
+
+     }
   }
 }
 
