@@ -20,7 +20,8 @@
             <!--<div v-if="user_type === 'ds'">-->
             <b-nav-item v-show="isDataScientist" href="/my_cv.html">Curriculum</b-nav-item>
 
-            <b-nav-item href="/login.html">Log In</b-nav-item>
+            <b-nav-item href="/login.html" v-show="!isLoggedIn">Log In</b-nav-item>
+            <b-nav-item href="#" v-show="isLoggedIn" @click="logOut">Log Out</b-nav-item>
             <!-- <b-nav-item-dropdown text="Lang" right>
             <b-dropdown-item href="#">EN</b-dropdown-item>
             <b-dropdown-item href="#">ES</b-dropdown-item>
@@ -46,12 +47,13 @@ export default {
           date: null
         },
       isCompany: null,
-      isDataScientist: null
+      isDataScientist: null,
+      isLoggedIn: null
     }
   }, mounted: function () {
-    var token = 'JWT ' + this.$cookies.get('token')
+    //var token = 'JWT ' + this.$cookies.get('token')
 
-    if (this.$cookies.get('user_type') == 'com') {
+    if (this.getCookie('user_type') == 'com') {
       this.isCompany = true
     } else {
       this.isDataScientist = true
@@ -61,7 +63,30 @@ export default {
       console.log(Auth.getLogin());
       this.$router.go('/login');
     }
+
+  }, created:function(){
+      if (this.getCookie('token')) {
+        this.isLoggedIn = true
+      } else {
+        this.isLoggedIn = false
+      }
+    }, methods: {
+        getCookie: function(name) {
+          var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+          return v ? v[2] : null;
+        },
+        setCookie: function(name, value, days) {
+          var d = new Date;
+          d.setTime(d.getTime() + 24*60*60*1000*days);
+          document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+        },
+        logOut: function() {
+              this.setCookie('token', '', -1)
+              location.reload()
+            }
+        }
 }
+
 </script>
 <style>
 #DataMe-brand {
