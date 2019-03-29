@@ -168,7 +168,7 @@ export default {
 
   }, mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get('https://api-datame.herokuapp.com/api/v1/offer',{ headers:
+    this.$http.get('http://localhost:8000/api/v1/offer',{ headers:
       { Authorization: token }
       }).then((result) => {
         this.items = result.data
@@ -185,7 +185,7 @@ export default {
        formApply.append("title", this.formApply.title);
        formApply.append("description", this.formApply.description);
        formApply.append("offerId", this.offerId);
-       this.$http.post('https://api-datame.herokuapp.com/api/v1/apply', formApply,{ headers:
+       this.$http.post('http://localhost:8000/api/v1/apply', formApply,{ headers:
       { Authorization: token }
       }).then((result) => {
           alert(result.data.message)
@@ -214,7 +214,7 @@ export default {
        formData.append("contract", this.form.contract);
 
 
-       this.$http.post('https://api-datame.herokuapp.com/api/v1/offer', formData,{ headers:
+       this.$http.post('http://localhost:8000/api/v1/offer', formData,{ headers:
       { Authorization: token }
       }).then((result) => {
           alert(result.data.message)
