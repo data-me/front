@@ -57,6 +57,8 @@ export default {
         this.$http.get('https://api-datame.herokuapp.com/api/v1/whoami', { headers: { Authorization: token }
         }).then((result) => {
           this.$cookies.set('user_type', result.data.user_type)
+        }).catch(function(error){
+          alert("Wrong username or password, please try again")
         })
       })
     }
