@@ -7,7 +7,9 @@
             <b-card-text>
               {{item.description}}
             </b-card-text>
+            <div v-if="user_type === 'com'">
             <b-link href="#" @click="senderId(item.DS_User_id)" class="card-link">Data Scientist</b-link>
+            </div>
 
           </b-card>
         </div>
@@ -32,7 +34,8 @@ export default {
           description: '',
           status: '',
           date: null
-        }
+        },
+        user_type: this.$cookies.get('user_type')
     }
   }, mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
@@ -47,7 +50,7 @@ export default {
 
       window.location.href = x
 
-  
+
     },
   }
 }

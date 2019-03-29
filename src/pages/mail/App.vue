@@ -5,7 +5,9 @@
           <b-button id="create-message" v-b-modal.modalxl variant="outline-primary" >Create new message</b-button>
         </div>
 
+        <div id="titlepage">
         <h1>Received Messages</h1>
+        </div>
         <div id="messages" v-for="item in items">
           <b-card :title="item.title" >
             <b-card-text>{{item.body}}</b-card-text>
@@ -30,7 +32,7 @@
             <label for="receiver">Receiver</label>
             <b-input type="text" id="receiver" v-model="form.receiver" :state="form.body.length > 0" :minlength="100" aria-describedby="receiverHelpBlock" />
             <b-form-text id="receiverHelpBlock">
-              The receiver of your message.
+              The username of the receiver of your message.
             </b-form-text>
             <br/>
              <b-button class="mt-2" variant="success" block @click="toggleModal">Create message</b-button>
@@ -61,13 +63,13 @@ export default {
     }
   }, mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get('http://localhost:8000/api/v1/message',{ headers: 
+    this.$http.get('http://localhost:8000/api/v1/message',{ headers:
       { Authorization: token }
       }).then((result) => {
         this.items = result.data
       })
-    
-    this.$http.get('http://localhost:8000/api/v1/users',{ headers: 
+
+    this.$http.get('http://localhost:8000/api/v1/users',{ headers:
       { Authorization: token }
       }).then((result) => {
         this.options = result.data
@@ -75,7 +77,7 @@ export default {
 
   }, methods: {
     createMessage: function () {
-      
+
     },
      toggleModal() {
        var token = 'JWT ' + this.$cookies.get('token')
@@ -83,8 +85,8 @@ export default {
        formData.append("title", this.form.title);
        formData.append("body", this.form.body);
        formData.append("username", this.form.receiver);
-      
-       this.$http.post('http://localhost:8000/api/v1/message', formData,{ headers: 
+
+       this.$http.post('http://localhost:8000/api/v1/message', formData,{ headers:
       { Authorization: token }
       }).then((result) => {
           alert(result.data.message)
@@ -101,10 +103,14 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  
+
 }
 
 #messages {
+  margin: 2em;
+}
+
+#titlepage {
   margin: 2em;
 }
 

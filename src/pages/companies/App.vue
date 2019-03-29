@@ -26,14 +26,14 @@ export default {
     }
   }, mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get('http://localhost:8000/api/v1/companies',{ headers: 
+    this.$http.get('http://localhost:8000/api/v1/company',{ headers: 
       { Authorization: token }
       }).then((result) => {
         console.log(result.data.companies)
         this.items = result.data.companies
       })
   }, methods: {
-  
+
   }
 }
 </script>
@@ -44,7 +44,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  
+
 }
 
 #offers {
