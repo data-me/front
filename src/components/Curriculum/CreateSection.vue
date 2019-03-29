@@ -2,7 +2,7 @@
     <div>
         <h4>Create Section</h4>
             <b-form id="section" @submit="onSubmit">
-            
+
             <b-col sm="3">
             <label for="name">Name:</label>
             </b-col>
@@ -30,7 +30,7 @@ export default {
       }
     }, mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get('https//api-datame.herokuapp.com/api/v1/section_names',{ headers: 
+    this.$http.get('https://api-datame.herokuapp.com/api/v1/section_names',{ headers: 
       { Authorization: token }
       }).then((result) => {
           for(var i = 0, size = result.data.length; i < size ; i++){

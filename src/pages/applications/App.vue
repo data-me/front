@@ -56,7 +56,7 @@ export default {
   }, methods: {
 
     senderId: function(id){
-      var x = `ds_profile?ds_id=${id}`
+      var x = `ds_profile.html?ds_id=${id}`
 
       window.location.href = x
 
