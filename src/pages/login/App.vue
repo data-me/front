@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navbar />
-        <b-form id="form" @submit.prevent @submit="onSubmit" v-if="show">
+    <Navbar v-if="showNavbar"/>
+    <b-form id="form" @submit.prevent @submit="onSubmit" v-if="showForm">
     <label for="textUsername">Username</label>
     <b-input type="text" v-model="form.username" id="textUsername"/>
     <br/>
@@ -33,7 +33,8 @@ export default {
           username: '',
           password: ''
         },
-        show: true
+        showForm: true,
+        showNavbar: true
       }
     },
   methods: {
@@ -52,11 +53,13 @@ export default {
           //alert(JSON.stringify(result.data))
           this.$cookies.set('token',result.data.token)
           this.$router.replace({path:'/helloworld'})
-          this.show = false
+          this.showForm = false
+          this.showNavbar = false
           let token = `JWT ${this.$cookies.get('token')}`
           this.$http.get('https://api-datame.herokuapp.com/api/v1/whoami', { headers: { Authorization: token }
         }).then((result) => {
           this.$cookies.set('user_type', result.data.user_type)
+          this.showNavbar = true
         })
       }).catch(()=>{
           alert("Unable to log in with provided credentials, please try again.")
