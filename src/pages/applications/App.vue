@@ -42,7 +42,6 @@ export default {
     }
   }, mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
-
     if (this.$cookies.get('user_type') == 'com') {
       this.isCompany = true
     } else {

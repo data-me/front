@@ -30,7 +30,7 @@
             </b-form-text>
             <br/>
             <label for="receiver">Receiver</label>
-            <b-input type="text" id="receiver" v-model="form.receiver" :state="form.body.length > 0" :minlength="100" aria-describedby="receiverHelpBlock" />
+            <b-input type="text" id="receiver" v-model="form.receiver" aria-describedby="receiverHelpBlock" />
             <b-form-text id="receiverHelpBlock">
               The username of the receiver of your message.
             </b-form-text>
@@ -63,13 +63,13 @@ export default {
     }
   }, mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get('http://localhost:8000/api/v1/message',{ headers:
+    this.$http.get('https://api-datame.herokuapp.com/api/v1/message',{ headers:
       { Authorization: token }
       }).then((result) => {
         this.items = result.data
       })
 
-    this.$http.get('http://localhost:8000/api/v1/users',{ headers:
+    this.$http.get('https://api-datame.herokuapp.com/api/v1/users',{ headers:
       { Authorization: token }
       }).then((result) => {
         this.options = result.data
@@ -86,7 +86,7 @@ export default {
        formData.append("body", this.form.body);
        formData.append("username", this.form.receiver);
 
-       this.$http.post('http://localhost:8000/api/v1/message', formData,{ headers:
+       this.$http.post('https://api-datame.herokuapp.com/api/v1/message', formData,{ headers:
       { Authorization: token }
       }).then((result) => {
           alert(result.data.message)
