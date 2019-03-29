@@ -58,13 +58,7 @@ export default {
     } else {
       this.isDataScientist = true
     }
-  }, created:function(){
-      Auth.logout();
-      console.log(Auth.getLogin());
-      this.$router.go('/login');
-    }
-
-  }, created:function(){
+  }, created: function() {
       if (this.getCookie('token')) {
         this.isLoggedIn = true
       } else {
@@ -82,7 +76,7 @@ export default {
         },
         logOut: function() {
               this.setCookie('token', '', -1)
-              location.reload()
+              window.location.href = "/";
             }
         }
 }
