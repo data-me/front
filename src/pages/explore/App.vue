@@ -71,7 +71,7 @@
              <br/>
              <br/>
              <label for="limit_time">Limit date:</label>
-            <b-input type="text" id="limit_time" v-model="form.limit_dtime" aria-describedby="descriptionHelpBlock" />
+            <b-input type="text" id="limit_time" v-model="form.limit_time" aria-describedby="descriptionHelpBlock" />
             <b-form-text id="descriptionHelpBlock">
               Limit date for being offered. (yyyy-MM-dd HH:mm)
             </b-form-text>
