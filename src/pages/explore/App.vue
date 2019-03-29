@@ -19,7 +19,7 @@
           </div>
         </div>
         <!-- ////// -->
-        
+
         <!-- Show offers -->
         <div id="offers" v-for="(item, index) in items">
           <b-card no-body>
@@ -51,7 +51,7 @@
             <label for="title">Title</label>
             <b-input type="text" v-model="form.title" id="title" aria-describedby="titleHelpBlock" />
             <b-form-text id="titleHelpBlock">
-              The main title for your offer, please keep it short. 
+              The main title for your offer, please keep it short.
             </b-form-text>
             <br/>
             <label for="description">Description</label>
@@ -142,12 +142,12 @@ export default {
         },
         offerId: '',
         user_type: this.$cookies.get('user_type')
-        
+
     }
-    
+
   }, mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get('http://localhost:8000/api/v1/offer',{ headers: 
+    this.$http.get('http://localhost:8000/api/v1/offer',{ headers:
       { Authorization: token }
       }).then((result) => {
         this.items = result.data
@@ -160,7 +160,7 @@ export default {
        formApply.append("title", this.formApply.title);
        formApply.append("description", this.formApply.description);
        formApply.append("offerId", this.offerId);
-       this.$http.post('http://localhost:8000/api/v1/apply', formApply,{ headers: 
+       this.$http.post('http://localhost:8000/api/v1/apply', formApply,{ headers:
       { Authorization: token }
       }).then((result) => {
           alert(result.data.message)
@@ -186,9 +186,9 @@ export default {
        formData.append("limit_time", "2019,12,12,10,40,0,0");
        formData.append("files", this.form.files);
        formData.append("contract", this.form.contract);
-       
-       
-       this.$http.post('http://localhost:8000/api/v1/offer', formData,{ headers: 
+
+
+       this.$http.post('http://localhost:8000/api/v1/offer', formData,{ headers:
       { Authorization: token }
       }).then((result) => {
           alert(result.data.message)
