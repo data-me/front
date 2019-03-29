@@ -12,9 +12,10 @@
         </b-card>
         
       </div>
-      <CreateItemSection :secid="item.Section"></CreateItemSection>
+      <CreateItemSection :secid="item.Section_Id"></CreateItemSection>
     </div>
-    <componentTest></componentTest>
+    <create-section></create-section>
+
   </div>
 
 
@@ -24,12 +25,14 @@
 import Navbar from '../../components/Navbar.vue'
 import Footer from '../../components/Footer.vue'
 import CreateItemSection from '../../components/Curriculum/CreateItemSection.vue'
+import CreateSection from '../../components/Curriculum/CreateSection.vue'
 
 export default {
   name: 'app',
   components: {
     Navbar,
     CreateItemSection,
+    CreateSection,
   },
   data () {
     return {

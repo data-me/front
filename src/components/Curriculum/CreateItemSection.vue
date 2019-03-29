@@ -1,5 +1,6 @@
 <template lang="html">
     <div>
+        <h4>Create item section</h4>
         <b-form id="item" @submit.prevent @submit="onSubmit" @reset="onReset">
 
             <b-col sm="3">
@@ -91,16 +92,18 @@ export default {
       evt.preventDefault()
         var token = 'JWT ' + this.$cookies.get('token')
       const baseURI = 'http://localhost:8000/api/v1/item'
-      this.$http.post(baseURI, {
-          'name':this.item.name,
-          'secid':this.secid,
-          'description': this.item.description,
-          'entity': this.item.entity,
-          'datestart': this.item.datestart,
-          'datefinish': this.item.datefinish
-      }, { headers: { Authorization: token }})
+      const formData = new FormData();
+      formData.append('name', this.item.name);
+      formData.append('secid', Number(this.secid));
+      formData.append('description', this.item.description);
+      formData.append('entity', this.item.entity);
+      formData.append('datestart',this.item.datestart);
+      if(this.item.datefinish !== null && this.item.datefinish.length !== 0){
+        formData.append('datefinish',this.item.datefinish);
+      }
+      this.$http.post(baseURI, formData, { headers: { Authorization: token }})
       .then((result) => {
-        this.$router.replace({path:'/my_cv'})
+          location.reload()
       })
     }
   }
