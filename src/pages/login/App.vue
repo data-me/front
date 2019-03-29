@@ -49,9 +49,6 @@ export default {
           'password':password
       })
       .then((result) => {
-          if(resut.status == 400){
-              throw next(alert("Wrong username or password, please try again"))
-          }
           //alert(JSON.stringify(result.data))
           this.$cookies.set('token',result.data.token)
           this.$router.replace({path:'/helloworld'})
@@ -60,7 +57,9 @@ export default {
           this.$http.get('https://api-datame.herokuapp.com/api/v1/whoami', { headers: { Authorization: token }
         }).then((result) => {
           this.$cookies.set('user_type', result.data.user_type)
-        }).catch(next)
+        }).catch(()=>{
+          alert("Wrong username or password, please try again.")
+        })
       })
     }
   }
