@@ -1,7 +1,9 @@
 <template>
     <div id="nav">
-    <b-navbar toggleable="lg" type="dark" variant="info">
-        <b-navbar-brand href="#">DataMe</b-navbar-brand>
+    <b-navbar toggleable="lg" type="dark" variant="dark">
+        <b-navbar-brand href="#">
+            <img id="DataMe-brand" src="..\assets\DataMe-brand.png">
+            </b-navbar-brand>
 
         <b-navbar-toggle target="nav_collapse" />
 
@@ -34,5 +36,8 @@ export default {
 }
 </script>
 <style>
-
+#DataMe-brand {
+    height: 35px;
+    width: auto;
+}
 </style>
