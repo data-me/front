@@ -15,7 +15,7 @@ export default {
   },
     mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get('http://api-datame.herokuapp.com/api/v1/helloworld', { headers: 
+    this.$http.get('https://api-datame.herokuapp.com/api/v1/helloworld', { headers: 
       { Authorization: token }
       }).then((result) => {
         this.msg = result.data.saludo
