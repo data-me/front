@@ -70,7 +70,7 @@ export default {
        this.$http.post('http://localhost:8000/api/v1/accept', formAccept, { headers:
       { Authorization: token }
       }).then((result) => {
-          alert(result.data.message)
+          alert("Successfully accepted apply")
           location.reload()
       })
 
