@@ -147,7 +147,7 @@ export default {
     
   }, mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get('http://localhost:8000/api/v1/offer',{ headers: 
+    this.$http.get('http://34.73.201.101:8000/api/v1/offer',{ headers: 
       { Authorization: token }
       }).then((result) => {
         this.items = result.data
@@ -188,7 +188,7 @@ export default {
        formData.append("contract", this.form.contract);
        
        
-       this.$http.post('http://localhost:8000/api/v1/offer', formData,{ headers: 
+       this.$http.post('http://34.73.201.101:8000/api/v1/offer', formData,{ headers: 
       { Authorization: token }
       }).then((result) => {
           alert(result.data.message)
@@ -198,7 +198,7 @@ export default {
      },
       onSubmit() {
         let token = `JWT ${this.$cookies.get('token')}`
-        this.$http.get(`http://127.0.0.1:8000/api/v1/offer?search=${this.form.search}`,{ headers:
+        this.$http.get(`http://34.73.201.101:8000/api/v1/offer?search=${this.form.search}`,{ headers:
           { Authorization: token }}).then((result) => {
             this.items = result.data
           })

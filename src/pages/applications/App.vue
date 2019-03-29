@@ -36,7 +36,7 @@ export default {
     }
   }, mounted: function () {
     var token = 'JWT ' + this.$cookies.get('token')
-    this.$http.get('http://localhost:8000/api/v1/apply',{ headers:
+    this.$http.get('http://34.73.201.101:8000/api/v1/apply',{ headers:
       { Authorization: token }
       }).then((result) => {
         this.items = result.data

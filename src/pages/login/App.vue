@@ -43,7 +43,7 @@ export default {
       var username = this.form.username
       var password = this.form.password
 
-      const baseURI = 'http://localhost:8000/api/v1/login'
+      const baseURI = 'http://34.73.201.101:8000/api/v1/login'
       this.$http.post(baseURI, {
           'username':username,
           'password':password
@@ -54,7 +54,7 @@ export default {
         this.$router.replace({path:'/helloworld'})
         this.show = false
         let token = `JWT ${this.$cookies.get('token')}`
-        this.$http.get('http://localhost:8000/api/v1/whoami', { headers: { Authorization: token }
+        this.$http.get('http://34.73.201.101:8000/api/v1/whoami', { headers: { Authorization: token }
         }).then((result) => {
           this.$cookies.set('user_type', result.data.user_type)
         })
